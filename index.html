@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Mobile GitHub Website</title>
+  <meta charset="UTF-8">
+  <title>Random Image Viewer</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+    }
+    img {
+      max-width: 90%;
+      height: auto;
+      margin: 1em 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello from my phone!</h1>
-  <p>This site is hosted with GitHub Pages.</p>
+  <h1>Random Image Viewer</h1>
+  <img id="displayedImage" src="" alt="Random image">
+  <br>
+  <button onclick="showNextImage()">Next</button>
+
+  <script>
+    // List your image filenames here:
+    const images = [
+      "images/20250226_151159.jpg",
+      "images/20250226_151345.jpg",
+      "images/20250301_104810.jpg",
+      "images/20250301_120511.jpg",
+      "images/20250430_152244.jpg",
+      "images/20250712_044101.jpg"
+    ];
+
+    let remaining = [];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function showNextImage() {
+      if (remaining.length === 0) {
+        remaining = shuffle(images.slice());
+      }
+      const nextImage = remaining.pop();
+      document.getElementById("displayedImage").src = nextImage;
+    }
+
+    // Show one image on initial load
+    showNextImage();
+  </script>
 </body>
 </html>
